@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+
+<div th:if="${msgpass}">
+    <br><br>
+    <span th:text="${msgpass}"></span>
+    <br><br>
+    <button onclick="window.location.href='/gallery';">
+        Login
+    </button>
+    <br><br>
+</div>
+
+<form th:action="@{/}" th:object="${newUser}" method="post">
+    <div class="container">
+        <h1>Register</h1>
+        <hr>
+        <div th:if="${msg}">
+            <span th:text="${msg}"></span>
+        </div>
+        <br>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+
+        <label for="username"><b>Username</b></label>
+        <input type="text" th:field="*{username}" id="username">
+        <br>
+        <br>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" th:field="*{email}" id="email">
+        <br><br>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" th:field="*{password}" id="psw">
+        <br><br>
+
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" th:field="*{passwordRepeat}" id="psw-repeat">
+        <br><br>
+
+        <button type="submit" class="registerbtn">Register</button>
+
+    </div>
+    <hr>
+    <div class="container signin">
+        <p>Already have an account? <a href="/gallery">Sign in</a>.</p>
+    </div>
+</form>
+</body>
+</html>

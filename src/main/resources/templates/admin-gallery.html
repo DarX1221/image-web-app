@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery Wall</title>
+</head>
+<body>
+<br>
+<button onclick="window.location.href='/gallery';">
+    User gallery
+</button>
+<button onclick="window.location.href='/upload';">
+    Upload Image
+</button>
+<button onclick="window.location.href='/logout';">
+    Logout
+</button>
+<br>
+<!--/*@thymesVar id="images" type="java.util.List<com.example.demo.model.AppImage>"*/-->
+<tr th:each="image : ${images}">
+
+    <img th:src="${image.adress}"/>
+    <br>
+    <form th:action="@{/deleteadm}" method="post">
+        <input type="hidden" name="id" th:value="${image.id}">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </form>
+    <br><br><br>
+</tr>
+</body>
+</html>

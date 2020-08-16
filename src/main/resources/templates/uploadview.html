@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Upload Image</title>
+</head>
+<body>
+<div th:if="${msg}">
+    <span th:text="${msg}"></span>
+</div>
+<form  method="post" enctype="multipart/form-data">
+    <input type="file" name="files" multiple>
+    <input type="submit" value="Upload Images">
+</form>
+<p>Max. number of files is 10!</p>
+<br>
+<button onclick="window.location.href='/gallery';">
+    Gallery
+</button>
+<div th:if="${admin}">
+    <button onclick="window.location.href='/all_images';">
+        All images (Admin)
+    </button>
+</div>
+<button onclick="window.location.href='/logout';">
+    Logout
+</button>
+</body>
+</html>

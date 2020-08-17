@@ -3,16 +3,15 @@ package com.example.demo.controller;
 import com.example.demo.model.AppImage;
 import com.example.demo.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
 public class GalleryAllImageControler {
     private final ImageService imageService;
+
 
     @Autowired
     public GalleryAllImageControler(ImageService imageService) {
@@ -32,5 +31,6 @@ public class GalleryAllImageControler {
         imageService.removeImageById(idL);
         return "redirect:/all_images";
     }
+
 
 }

@@ -27,20 +27,14 @@ public class ImageService {
     public List<AppImage> getAllImages() {
         //check admin role
         if (userService.loggedUserIsAdminChecker()) {
-            List<AppImage> images = imageRepository.findAll();
-            return images;
+            return imageRepository.findAll();
         }
         return null;
     }
 
-    public List<AppImage> getImagesByUserId(Long id) {
-        List<AppImage> images = imageRepository.findByAppUser_Id(id);
-        return images;
-    }
 
     public List<AppImage> getImagesByUsername(String username) {
-        List<AppImage> images = imageRepository.findByAppUser_Username(username);
-        return images;
+        return imageRepository.findByAppUser_Username(username);
     }
 
     public boolean removeImageById(Long id) {
@@ -53,18 +47,14 @@ public class ImageService {
             }
         }
 
-        // double click of "delete image" trying to remove image two times,
+        // double click "delete image", try to remove image two times
         try {
             String cloudinaryId = imageRepository.findAppImageById(id).getCloudinaryId();
             imageUploader.deleteImage(cloudinaryId);
             imageRepository.removeAppImageById(id);
             return true;
-        } catch (Exception ex) {
-        }
+        } catch (Exception ex) {}
         return false;
     }
 
-    public List<AppImage> findAllImages() {
-        return imageRepository.findAll();
-    }
 }

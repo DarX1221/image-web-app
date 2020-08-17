@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -21,9 +21,6 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public AppUser findAppUserByEmail(String email) {
-        return userRepository.findAppUserByEmail(email);
-    }
 
     public void saveUser(AppUser appUser) {
         userRepository.save(appUser);

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.AppUser;
 import com.example.demo.model.RegisterUserTemplate;
 import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +18,7 @@ public class RegisterControler {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public RegisterControler(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
@@ -51,5 +53,4 @@ public class RegisterControler {
         userService.saveUser(appUser);
         return "register";
     }
-
 }

@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import org.apache.commons.validator.routines.EmailValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class RegisterUserTemplate {
     public String username;

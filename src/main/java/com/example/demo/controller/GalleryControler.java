@@ -43,7 +43,4 @@ public class GalleryControler {
         return "redirect:/gallery";
     }
 
-
-
-
 }

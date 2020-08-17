@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
-import javax.swing.*;
 
 
 @Entity
@@ -18,9 +17,9 @@ public class AppImage {
     public AppImage() {
     }
 
-    public AppImage(String cloudinaryId, String adress, AppUser appUser) {
+    public AppImage(String cloudinaryId, String address, AppUser appUser) {
         this.cloudinaryId = cloudinaryId;
-        this.adress = adress;
+        this.adress = address;
         this.appUser = appUser;
     }
 

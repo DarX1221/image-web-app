@@ -13,14 +13,14 @@ import java.util.List;
 public class ImageService {
 
     private final ImageRepository imageRepository;
-    private final ImageUploader imageUploader;
+    private final ImageUploaderService imageUploaderService;
     private final UserService userService;
 
     @Autowired
     public ImageService(ImageRepository imageRepository,
-                        ImageUploader imageUploader, UserService userService) {
+                        ImageUploaderService imageUploaderService, UserService userService) {
         this.imageRepository = imageRepository;
-        this.imageUploader = imageUploader;
+        this.imageUploaderService = imageUploaderService;
         this.userService = userService;
     }
 
@@ -49,7 +49,7 @@ public class ImageService {
         // double click "delete image", try to remove image two times
         try {
             String cloudinaryId = imageRepository.findAppImageById(id).getCloudinaryId();
-            imageUploader.deleteImage(cloudinaryId);
+            imageUploaderService.deleteImage(cloudinaryId);
             imageRepository.removeAppImageById(id);
             return true;
         } catch (InternalAuthenticationServiceException doubleClickDeleteEsception) {

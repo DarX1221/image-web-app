@@ -18,14 +18,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class ImageUploader {
+public class ImageUploaderService {
 
     private final Cloudinary cloudinary;
     private final ImageRepository imageRepository;
     private final UserService userService;
 
     @Autowired
-    public ImageUploader(ImageRepository imageRepository, UserService userService) {
+    public ImageUploaderService(ImageRepository imageRepository, UserService userService) {
         this.imageRepository = imageRepository;
         this.userService = userService;
         // configuration (Map) for image cloud (cloudinary)

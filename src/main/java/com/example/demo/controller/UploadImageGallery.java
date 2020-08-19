@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.ImageUploader;
+import com.example.demo.service.ImageUploaderService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +13,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UploadImageGallery {
-    private final ImageUploader imageUploader;
+    private final ImageUploaderService imageUploaderService;
     private final UserService userService;
 
     @Autowired
-    public UploadImageGallery(ImageUploader imageUploader, UserService userService) {
-        this.imageUploader = imageUploader;
+    public UploadImageGallery(ImageUploaderService imageUploaderService, UserService userService) {
+        this.imageUploaderService = imageUploaderService;
         this.userService = userService;
     }
 
@@ -44,7 +44,7 @@ public class UploadImageGallery {
         StringBuilder fileNames = new StringBuilder();
         for (MultipartFile file : files) {
             try {
-                imageUploader.uploadImage(file);
+                imageUploaderService.uploadImage(file);
                 fileNames.append(file.getOriginalFilename() + ",   ");
             } catch (Exception ex) {
                 ex.printStackTrace();

@@ -17,10 +17,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+
     public AppUser findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-
 
     public void saveUser(AppUser appUser) {
         userRepository.save(appUser);
@@ -45,17 +45,20 @@ public class UserService {
         return null;
     }
 
-    public boolean loggedUserIsAdminChecker() {
+    public boolean checkTahtLoggedUserIsAdmin() {
+        // take username from SpringSecurity and check this user in DB
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        if(username.equals("anonymousUser") || username == null) {return false;}
+        if(userRepository.findByUsername(username) == null) {
+            return false;
+        }
         if(userRepository.findByUsername(username).getRole().equals("ROLE_ADMIN")) {
             return true;
         }
-        else {return false;}
+        return false;
     }
 
-    public AppUser userTemplateToAppUser(RegisterUserTemplate templateUser) {
+    public AppUser registerUserTemplateToAppUser(RegisterUserTemplate templateUser) {
         return new AppUser(templateUser.getUsername(),
                 templateUser.getEmail(), templateUser.getPassword(), "ROLE_USER");
     }

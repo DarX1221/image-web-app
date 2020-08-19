@@ -25,7 +25,7 @@ public class GalleryControler {
 
     @GetMapping("/gallery")
     String gallery(Model model) {
-        if (userService.loggedUserIsAdminChecker()) {
+        if (userService.checkTahtLoggedUserIsAdmin()) {
             model.addAttribute("admin", "Admin");
         }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

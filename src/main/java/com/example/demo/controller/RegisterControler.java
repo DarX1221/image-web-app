@@ -49,7 +49,7 @@ public class RegisterControler {
         String pass = passwordEncoder.encode(newUser.password);
         newUser.setPassword(pass);
         newUser.setPasswordRepeat(pass);
-        AppUser appUser = userService.userTemplateToAppUser(newUser);
+        AppUser appUser = userService.registerUserTemplateToAppUser(newUser);
         userService.saveUser(appUser);
         return "register";
     }

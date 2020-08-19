@@ -3,10 +3,10 @@ package com.example.demo.service;
 import com.example.demo.model.AppImage;
 import com.example.demo.repo.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -26,7 +26,7 @@ public class ImageService {
 
     public List<AppImage> getAllImages() {
         //check admin role
-        if (userService.loggedUserIsAdminChecker()) {
+        if (userService.checkTahtLoggedUserIsAdmin()) {
             return imageRepository.findAll();
         }
         return null;
@@ -42,18 +42,22 @@ public class ImageService {
         String username = auth.getName();
         // if logged username is different than username in AppImage(Long id) to delete, you can delete image only if you are admin
         if (!imageRepository.findAppImageById(id).getAppUser().getUsername().equals(username)) {
-            if (!userService.loggedUserIsAdminChecker()) {
+            if (!userService.checkTahtLoggedUserIsAdmin()) {
                 return false;
             }
         }
-
         // double click "delete image", try to remove image two times
         try {
             String cloudinaryId = imageRepository.findAppImageById(id).getCloudinaryId();
             imageUploader.deleteImage(cloudinaryId);
             imageRepository.removeAppImageById(id);
             return true;
-        } catch (Exception ex) {}
+        } catch (InternalAuthenticationServiceException doubleClickDeleteEsception) {
+            throw new InternalAuthenticationServiceException(
+                    "This exception was throw by double click on delete image button");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return false;
     }
 

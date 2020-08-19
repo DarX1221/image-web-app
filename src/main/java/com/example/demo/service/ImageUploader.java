@@ -28,6 +28,7 @@ public class ImageUploader {
     public ImageUploader(ImageRepository imageRepository, UserService userService) {
         this.imageRepository = imageRepository;
         this.userService = userService;
+        // configuration (Map) for image cloud (cloudinary)
         Map config = new HashMap();
         config.put("cloud_name", "dhm3ydouf");
         config.put("api_key", "738384397126113");
@@ -35,6 +36,10 @@ public class ImageUploader {
         this.cloudinary = new Cloudinary(config);
     }
 
+    /***
+     * Uploads the image from client(user) to app server, and then uploads on cloud and saves in the DB
+     * @throws IOException if the uploads on server or cloud will failed
+     */
     public void uploadImage(MultipartFile mFile) throws IOException {
         File file = new File("filename");
         FileUtils.writeByteArrayToFile(file, mFile.getBytes());
@@ -58,6 +63,5 @@ public class ImageUploader {
         }
         return true;
     }
-
 
 }

@@ -18,6 +18,7 @@ public class GalleryAllImageControler {
         this.imageService = imageService;
     }
 
+    // admin gallery returns images of all users
     @GetMapping("/all_images")
     String adminGallery(Model model) {
         List<AppImage> images = imageService.getAllImages();

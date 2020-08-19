@@ -24,7 +24,7 @@ public class UploadImageGallery {
 
     @GetMapping("/upload")
     public String uploadPage(Model model) {
-        if (userService.loggedUserIsAdminChecker()) {
+        if (userService.checkTahtLoggedUserIsAdmin()) {
             model.addAttribute("admin", "Admin");
         }
         return "uploadview";
@@ -33,7 +33,7 @@ public class UploadImageGallery {
 
     @RequestMapping("/upload")
     public String upload(Model model, @RequestParam("files") MultipartFile[] files) {
-        if (userService.loggedUserIsAdminChecker()) {
+        if (userService.checkTahtLoggedUserIsAdmin()) {
             model.addAttribute("admin", "Admin");
         }
         if (files.length > 10) {
